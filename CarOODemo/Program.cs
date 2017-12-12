@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace CarOODemo
 {
@@ -6,14 +7,30 @@ namespace CarOODemo
     {
         static void Main(string[] args)
         {
-            //TODO: create different cars and "drive" them
-            GasCar explorer = new GasCar("Ford", "Explorer", 20, 15);
-            explorer.Drive(75);
-            explorer.Drive(50);
+            //create different cars and "drive" them
+            ICar explorer = new GasCar("Ford", "Explorer", 20, 15);
+            ICar leaf = new ElectricCar("Nissan", "Leaf", 60, 3);
+            ICar pinto = new GasCar("Ford", "Pinto", 10, 20);
 
-            ElectricCar leaf = new ElectricCar("Nissan", "Leaf", 60, 3);
-            leaf.Drive(200);
-            leaf.Drive(15);
+            List<ICar> cars = new List<ICar>()
+            {
+                explorer,
+                leaf,
+                pinto
+            };
+
+            //sort list by MPG
+            cars.Sort(new MilesPerGallonComparer());
+            cars.Reverse();
+
+            foreach(ICar car in cars)
+            {
+                car.Start();
+                Console.WriteLine("MPG " + car.GetMilesPerGallon());
+                car.Drive(75);
+                car.Drive(50);
+            }
+
         }
     }
 }

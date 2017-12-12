@@ -4,7 +4,7 @@ using System.Text;
 
 namespace CarOODemo
 {
-    public class GasCar : Car
+    public class GasCar : BaseCar, ICar
     {
         public int GasTankSize { get; private set; }
         public double GasTankLevel { get; private set; }
@@ -18,7 +18,7 @@ namespace CarOODemo
             this.MilesPerGallon = milesPerGallon;
         }
 
-        public override void Drive(int miles)
+        public void Drive(int miles)
         {
             //adjust fuel based on mmp
             //write out distance traveled and fuel remaining
@@ -33,6 +33,16 @@ namespace CarOODemo
             var text = String.Format("Traveled {0} Miles, Gallons Used {1}, Gallons Remaining {2}", distanceTraveled, gallonsUsed, this.GasTankLevel);
             Console.WriteLine(text);
 
+        }
+
+        public void Start()
+        {
+            Console.WriteLine(String.Format("{0} - {1} started, gas engine running", this.Make, this.Model));
+        }
+
+        public double GetMilesPerGallon()
+        {
+            return this.MilesPerGallon;
         }
     }
 }

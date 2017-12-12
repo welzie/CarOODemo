@@ -4,8 +4,10 @@ using System.Text;
 
 namespace CarOODemo
 {
-    public class ElectricCar : Car
+    public class ElectricCar : BaseCar, ICar
     {
+        public const double KWH_PER_GALLON = 33.4;
+
         public int BatteryKwhSize { get; private set; }
         public double BatteryLevel { get; private set; }
         public double MilesPerKwh { get; private set; }
@@ -18,7 +20,9 @@ namespace CarOODemo
             this.MilesPerKwh = milesPerKwh;
         }
 
-        public override void Drive(int miles)
+        
+
+        public void Drive(int miles)
         {
             //adjust fuel based on mmp
             //write out distance traveled and fuel remaining
@@ -33,6 +37,16 @@ namespace CarOODemo
             var text = String.Format("Traveled {0} Miles, Kwh Used {1}, Kwh Remaining {2}", distanceTraveled, kwhUsed, this.BatteryLevel);
             Console.WriteLine(text);
 
+        }
+
+        public void Start()
+        {
+            Console.WriteLine(String.Format("{0} - {1} started, batteries ready", this.Make, this.Model));
+        }
+
+        public double GetMilesPerGallon()
+        {
+            return this.MilesPerKwh * KWH_PER_GALLON;
         }
     }
 }

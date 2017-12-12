@@ -4,18 +4,15 @@ using System.Text;
 
 namespace CarOODemo
 {
-    public abstract class Car
+    public abstract class BaseCar
     {
         public string Make { get; private set; }
         public string Model { get; private set; }
 
-        public Car(string make, string model)
+        public BaseCar(string make, string model)
         {
             this.Make = make;
             this.Model = model;
         }
-
-        public abstract void Drive(int miles);
-
     }
 }
